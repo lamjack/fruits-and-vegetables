@@ -1,0 +1,10 @@
+[
+	"node/Item.ts",
+	"event/GameOverEvent.ts",
+	"node/ItemsNode.ts",
+	"sence/GameOver.ts",
+	"LoadingUI.ts",
+	"sence/GameSence.ts",
+	"sence/IntroSence.ts",
+	"Main.ts"
+]
