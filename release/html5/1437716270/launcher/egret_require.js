@@ -27,30 +27,50 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class LoadingUI extends egret.Sprite
-{
+egret_h5 = {};
 
-    public constructor()
-    {
-        super();
-        this.createView();
+egret_h5.prefix = "";
+
+egret_h5.loadScript = function (list, callback) {
+    var loaded = 0;
+    var loadNext = function () {
+        egret_h5.loadSingleScript(egret_h5.prefix + list[loaded], function () {
+            loaded++;
+            if (loaded >= list.length) {
+                callback();
+            }
+            else {
+                loadNext();
+            }
+        })
+    };
+    loadNext();
+};
+
+egret_h5.loadSingleScript = function (src, callback) {
+    var s = document.createElement('script');
+    if (s.hasOwnProperty("async")) {
+        s.async = false;
     }
+    s.src = src;
+    s.addEventListener('load', function () {
+        s.parentNode.removeChild(s);
+        this.removeEventListener('load', arguments.callee, false);
+        callback();
+    }, false);
+    document.body.appendChild(s);
+};
 
-    private textField:egret.TextField;
-
-    private createView():void
-    {
-        this.textField = new egret.TextField();
-        this.addChild(this.textField);
-        this.textField.y = 300;
-        this.textField.width = 480;
-        this.textField.height = 100;
-        this.textField.textAlign = "center";
+egret_h5.preloadScript = function (list, prefix) {
+    if (!egret_h5.preloadList) {
+        egret_h5.preloadList = [];
     }
+    egret_h5.preloadList = egret_h5.preloadList.concat(list.map(function (item) {
+        return prefix + item;
+    }))
+};
 
-    public setProgress(current, total):void
-    {
-        //显示进度
-        this.textField.text = "Loading..." + current + "/" + total;
-    }
-}
+egret_h5.startLoading = function () {
+    var list = egret_h5.preloadList;
+    egret_h5.loadScript(list, egret_h5.startGame);
+};

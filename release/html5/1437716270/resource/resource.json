@@ -1,0 +1,26 @@
+{
+    "groups": [
+        {
+            "keys": "ui_json,over_png,bg_png",
+            "name": "preload"
+        }
+    ],
+    "resources": [
+        {
+            "name": "bg_png",
+            "type": "image",
+            "url": "assets/bg.png"
+        },
+        {
+            "name": "over_png",
+            "type": "image",
+            "url": "assets/over.png"
+        },
+        {
+            "name": "ui_json",
+            "subkeys": "description,fruit_1,fruit_2,fruit_3,fruit_4,fruit_5,fruit_6,fruit_7,fruit_8,fruit_9,fruits,life,most_top,retry,share,start,time,title,vegetable_1,vegetable_2,vegetable_3,vegetable_4,vegetable_5,vegetable_6,vegetable_7,vegetable_8,vegetable_9,vegetables",
+            "type": "sheet",
+            "url": "assets/ui.json"
+        }
+    ]
+}
